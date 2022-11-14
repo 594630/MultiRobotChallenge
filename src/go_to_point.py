@@ -13,7 +13,7 @@ import math
 class GoToPointClass:
     def __init__(self):
         #TODO: Initialze a ros node
-        rospy.init_node('to_point', anonymous = False)
+        rospy.init_node('go_to_point', anonymous = False)
 
         #TODO: Create a subscriber to the /odom topic with the callback function self.clbk_odom
         self.odom_sub = rospy.Subscriber("/odom", Odometry, self.clbk_odom)
