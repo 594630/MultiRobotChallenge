@@ -8,7 +8,7 @@ from ar_track_alvar_msgs.msg import AlvarMarkers
 class RobotClass:
     def __init__(self):
         rospy.init_node("RobotClass", anonymous=False)
-        #test
+
         rospy.Subscriber("scan", LaserScan, self.clbk_laser)
         rospy.Subscriber('ar_pose_marker', AlvarMarkers, self.clbk_ar_marker)
 

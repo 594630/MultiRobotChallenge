@@ -1,11 +1,9 @@
 <launch>
   <group ns="tb3_0">
-    <node pkg="multi_robot_challenge_22" name="RobotClass" type="robot_new.py" output="screen" />
-    <node pkg="multi_robot_challenge_22" name="wall_follower" type="wall_follower.py" output="screen" />
+    <node pkg="multi_robot_challenge_22" name="wallfollower" type="wallfollower.py" output="screen" />
   </group>
   <group ns="tb3_1">
-    <node pkg="multi_robot_challenge_22" name="RobotClass" type="robot_new.py" output="screen" />
-    <node pkg="multi_robot_challenge_22" name="wall_follower" type="wall_follower.py" output="screen" />
+    <node pkg="multi_robot_challenge_22" name="wallfollower" type="wallfollower.py" output="screen" />
   </group>
 
   <node pkg="multi_robot_challenge_22" name="LeaderClass" type="leader.py" output="screen" />
