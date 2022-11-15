@@ -20,10 +20,10 @@ class bug2():
         rospy.init_node('bug2', anonymous=False)
 
         # TODO: Create a subscriber to the /scan topic with the callback function self.clbk_laser
-        self.laser_sub = rospy.Subscriber("/scan", LaserScan, self.clbk_laser)
+        self.laser_sub = rospy.Subscriber("scan", LaserScan, self.clbk_laser)
 
         # TODO: Create a subscriber to the /odom topic with the callback function self.clbk_odom
-        self.odom_sub = rospy.Subscriber("/odom", Odometry, self.clbk_odom)
+        self.odom_sub = rospy.Subscriber("odom", Odometry, self.clbk_odom)
 
         self.srv_client_go_to_point_ = None
         self.srv_client_wall_follower_ = None

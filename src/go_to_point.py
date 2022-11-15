@@ -17,10 +17,10 @@ class GoToPointClass:
         rospy.init_node('go_to_point', anonymous=False)
 
         # TODO: Create a subscriber to the /odom topic with the callback function self.clbk_odom
-        self.odom_sub = rospy.Subscriber("/odom", Odometry, self.clbk_odom)
+        self.odom_sub = rospy.Subscriber("odom", Odometry, self.clbk_odom)
 
         # TODO: Create a publisher to the /cmd_vel topic assigned to a variable called self.vel_pub
-        self.vel_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
+        self.vel_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
 
         # TODO: Create a Service server with the Name "go_to_point_switch" using a custom message structure given in the assignment description and self.go_to_point_switch as the handeling function
         self.service_server = rospy.Service('go_to_point_switch', GoToPoint, self.go_to_point_switch)

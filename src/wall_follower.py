@@ -8,18 +8,19 @@ from tf import transformations
 from std_srvs.srv import *
 import math
 
+
 class WallFollowerClass:
     def __init__(self):
-        #TODO: Initialze a ros node
-        rospy.init_node('wall_follower', anonymous = False)
+        # TODO: Initialze a ros node
+        rospy.init_node('wall_follower', anonymous=False)
 
-        #TODO: Create a subscriber to the /scan topic with the callback function self.clbk_laser
-        self.laser_sub = rospy.Subscriber("/scan", LaserScan, self.clbk_laser)
+        # TODO: Create a subscriber to the /scan topic with the callback function self.clbk_laser
+        self.laser_sub = rospy.Subscriber("scan", LaserScan, self.clbk_laser)
 
-        #TODO: Create a publisher to the /cmd_vel topic assigned to a variable called self.vel_pub
-        self.vel_pub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
+        # TODO: Create a publisher to the /cmd_vel topic assigned to a variable called self.vel_pub
+        self.vel_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
 
-        #TODO: Create a Service server with the Name "wall_follower_switch" using SetBool as a message structure and self.wall_follower_switch as the handeling function
+        # TODO: Create a Service server with the Name "wall_follower_switch" using SetBool as a message structure and self.wall_follower_switch as the handeling function
         rospy.Service('wall_follower_switch', SetBool, self.wall_follower_switch)
 
         self.active = False
@@ -40,16 +41,16 @@ class WallFollowerClass:
 
     def clbk_laser(self, msg):
         self.regions = {
-            'right':  min(min(msg.ranges[180:299]), 1.0),
+            'right': min(min(msg.ranges[180:299]), 1.0),
             'fright': min(min(msg.ranges[300:339]), 1.0),
-            'front':  min(min(min(msg.ranges[0:19]), min(msg.ranges[340:359])),1.0),
-            'fleft':  min(min(msg.ranges[20:59]), 1.0),
-            'left':   min(min(msg.ranges[60:179]), 1.0),
+            'front': min(min(min(msg.ranges[0:19]), min(msg.ranges[340:359])), 1.0),
+            'fleft': min(min(msg.ranges[20:59]), 1.0),
+            'left': min(min(msg.ranges[60:179]), 1.0),
         }
 
         self.take_action()
 
-    #TODO: Create the handeling function wall_follower_switch which should assign the transmitted boolean value to self.active
+    # TODO: Create the handeling function wall_follower_switch which should assign the transmitted boolean value to self.active
     def wall_follower_switch(self, active):
         self.active = active.data
         res = SetBoolResponse()
@@ -58,7 +59,7 @@ class WallFollowerClass:
 
     def change_state(self, state):
         if state is not self.state:
-            rospy.loginfo('Wall follower - ['+str(state)+'] - '+str(self.state_dict[state]))
+            #    rospy.loginfo('Wall follower - ['+str(state)+'] - '+str(self.state_dict[state]))
             self.state = state
 
     def take_action(self):
