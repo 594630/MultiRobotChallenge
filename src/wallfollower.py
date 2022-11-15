@@ -15,12 +15,12 @@ class WallFollower:
 		rospy.init_node('wallfollower', anonymous = False)
 
 		rospy.Subscriber("scan", LaserScan, self.clbk_lidar)
-		rospy.Subscriber('ar_pose_marker', AlvarMarkers, self.clbk_ar_marker)
-		self.tfBuffer = tf2_ros.Buffer()
-		self.listener = tf2_ros.TransformListener(self.tfBuffer)
+		#rospy.Subscriber('ar_pose_marker', AlvarMarkers, self.clbk_ar_marker)
+		#self.tfBuffer = tf2_ros.Buffer()
+		#self.listener = tf2_ros.TransformListener(self.tfBuffer)
 
 		self.vel_pub = rospy.Publisher("cmd_vel", Twist, queue_size=10)
-		self.marker_id_pub = rospy.Publisher('marker_id', UInt32, queue_size=10)
+		#self.marker_id_pub = rospy.Publisher('marker_id', UInt32, queue_size=10)
 
 		self.regions = {
 			'right': 0,
@@ -35,15 +35,15 @@ class WallFollower:
 			1: 'turn left',
 			2: 'follow the wall',
 		}
-		self.marker_id = 100
-		while self.marker_id == 100:
-			rospy.loginfo("Waitiing for the first marker ID...")
-			rospy.sleep(1)
+		#self.marker_id = 100
+		#while self.marker_id == 100:
+			#rospy.loginfo("Waitiing for the first marker ID...")
+			#rospy.sleep(1)
 
-	def clbk_ar_marker(self, msg):
-		if len(msg.markers) > 0:
-			self.marker_id = msg.markers[0].id
-			self.marker_pose = msg.markers[0].pose
+	#def clbk_ar_marker(self, msg):
+		#if len(msg.markers) > 0:
+			#self.marker_id = msg.markers[0].id
+			#self.marker_pose = msg.markers[0].pose
 
 	def clbk_lidar(self, msg):
 		self.regions = {
@@ -97,7 +97,7 @@ class WallFollower:
 	def find_wall(self):
 		msg = Twist()
 		msg.linear.x = 0.2
-		msg.angular.z = 0.0
+		msg.angular.z = -0.15
 		return msg
 
 	def turn_left(self):
@@ -125,7 +125,7 @@ class WallFollower:
 				rospy.logerr('Unknown state!')
 
 			self.vel_pub.publish(msg)
-			self.marker_id_pub.publish(self.marker_id)
+			#self.marker_id_pub.publish(self.marker_id)
 			rate.sleep()
 
 if __name__ == '__main__':

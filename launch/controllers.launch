@@ -1,11 +1,12 @@
 <launch>
   <group ns="tb3_0">
-    <node pkg="multi_robot_challenge_22" name="wallfollower" type="wallfollower.py" output="screen" />
+    <!-- <node pkg="multi_robot_challenge_22" name="wallfollower" type="wallfollower.py" output="screen" /> -->
   </group>
   <group ns="tb3_1">
     <node pkg="multi_robot_challenge_22" name="wallfollower" type="wallfollower.py" output="screen" />
+    <node pkg="multi_robot_challenge_22" name="ar_tag_reciever" type="ar_tag_reciever.py" output="screen" />
   </group>
 
-  <node pkg="multi_robot_challenge_22" name="LeaderClass" type="leader.py" output="screen" />
+  <!--<node pkg="multi_robot_challenge_22" name="LeaderClass" type="leader.py" output="screen" />-->
 
 </launch>

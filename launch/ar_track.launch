@@ -1,5 +1,5 @@
 <launch>
-    <arg name="robot_namespace" default="tb3_0"/>
+    <arg name="robot_namespace" default="tb3_1"/>
     <arg name="camera" default="camera" />
 
     <arg name="pi/2" value="1.5707963267948966" />

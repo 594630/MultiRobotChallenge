@@ -26,6 +26,7 @@ class ARTagClass:
         self.marker_list = [False, False, False, False, False]
 
         # Setting a default value for self.marker_id and waiting until it's updated by the ar_pose_marker Subscriber
+        rospy.set_param('/start_flag', True)
         self.marker_id = 100
         while self.marker_id == 100:
             rospy.loginfo("Waitiing for the first marker ID...")
@@ -42,7 +43,7 @@ class ARTagClass:
         r = rospy.Rate(1)
 
         #Starting the scoring
-        rospy.set_param('/start_flag', True)
+        #rospy.set_param('/start_flag', True)
 
         while not rospy.is_shutdown():
             # Marker ID
@@ -66,7 +67,7 @@ class ARTagClass:
             if not self.marker_list[marker_id]:
                 # Trying to lookup the current transformation from the camera frame to the world frame
                 try:
-                    self.trans_camera_odom = self.tfBuffer.lookup_transform("map", "tb3_0/camera_rgb_optical_frame", rospy.Time())
+                    self.trans_camera_odom = self.tfBuffer.lookup_transform("map", "tb3_1/camera_rgb_optical_frame", rospy.Time())
                     # break
                 except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
                     r.sleep()
