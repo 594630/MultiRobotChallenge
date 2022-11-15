@@ -16,6 +16,8 @@ from multi_robot_challenge_22.msg import bug2_navAction, bug2_navGoal, bug2_navR
 
 class bug2():
     def __init__(self):
+
+        self.found_wall = False
         # TODO: Initialze a ros node
         rospy.init_node('bug2', anonymous=False)
 
@@ -84,17 +86,21 @@ class bug2():
         self.state_ = state
         log = "state changed: %s" % self.state_desc_[state]
         rospy.loginfo(log)
-        if self.state_ == 0:
-            resp = self.srv_client_go_to_point_(True, self.desired_position_)
-            resp = self.srv_client_wall_follower_(False)
-        if self.state_ == 1:
-            self.last_line_position = self.position_
+        if self.found_wall == False:
+            if self.state_ == 0:
+                resp = self.srv_client_go_to_point_(True, self.desired_position_)
+                resp = self.srv_client_wall_follower_(False)
+            if self.state_ == 1:
+                self.last_line_position = self.position_
+                resp = self.srv_client_go_to_point_(False, self.desired_position_)
+                resp = self.srv_client_wall_follower_(True)
+                self.found_wall = True
+            if self.state_ == 2:
+                resp = self.srv_client_go_to_point_(False, self.desired_position_)
+                resp = self.srv_client_wall_follower_(False)
+        else:
             resp = self.srv_client_go_to_point_(False, self.desired_position_)
             resp = self.srv_client_wall_follower_(True)
-        if self.state_ == 2:
-            resp = self.srv_client_go_to_point_(False, self.desired_position_)
-            resp = self.srv_client_wall_follower_(False)
-
     def distance_to_line(self, p0):
         # p0 is the current position
         # p1 and p2 points define the line
