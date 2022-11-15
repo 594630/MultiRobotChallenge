@@ -5,10 +5,12 @@ from geometry_msgs.msg import Point, Twist
 from math import atan2, sqrt
 from tf import transformations
 from nav_msgs.msg import Odometry
-#Earlier solution
+
+
+# Earlier solution
 class GoToPoint:
     def __init__(self):
-        rospy.init_node('topointnode', anonymous = False)
+        rospy.init_node('topointnode', anonymous=False)
 
         self.odomsub = rospy.Subscriber("/odom", Odometry, self.odom_callback)
         self.velpub = rospy.Publisher("/cmd_vel", Twist, queue_size=10)
@@ -63,6 +65,7 @@ class GoToPoint:
         vel_msg.linear.x = 0
         vel_msg.angular.z = 0
         self.velpub.publish(vel_msg)
+
 
 if __name__ == '__main__':
     gtp = GoToPoint()

@@ -3,6 +3,7 @@
 import rospy
 from std_msgs.msg import Float64, UInt32
 
+
 class LeaderClass:
     def __init__(self):
         rospy.init_node("LeaderClass", anonymous=False)
@@ -39,6 +40,7 @@ class LeaderClass:
             rospy.loginfo("TB3_1 Marker ID: %s", self.tb3_1_marker_id)
 
             r.sleep()
+
 
 if __name__ == '__main__':
     robot = LeaderClass()

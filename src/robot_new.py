@@ -12,6 +12,8 @@ from multi_robot_challenge_22.msg import bug2_navAction, bug2_navGoal, bug2_navR
 class RobotClass:
     def __init__(self):
 
+        rospy.init_node('robot', anonymous=False)
+
         # TODO: Create an action client connected to the "bug2_nav_action" action server.
         self.marker_id = None
         self.lidar_value = None
