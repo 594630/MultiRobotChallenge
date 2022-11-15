@@ -5,7 +5,7 @@ import time
 from sensor_msgs.msg import LaserScan
 from geometry_msgs.msg import Twist
 PI = 3.1415926535897
-
+from datetime import datetime
 
 
 
@@ -104,7 +104,7 @@ class SimpleNavigationClass:
 				#rospy.spin()
 
 			def threesixty(self):
-				dps = 35 #degrees per second
+				dps = 60 #degrees per second
 				ta = 359 #target angle
     				#Converting from angles to radians
 				angular_dps = dps*2*PI/360
@@ -156,7 +156,12 @@ class SimpleNavigationClass:
 				
 			
 			
-			
+			now = datetime.now()
+			#print(now.second)
+			while now.second % 20 == 0:
+				print(now.second)
+				threesixty(self)
+				break
 			
 			#rotating when meeting a corner
 			#if self.lidar_left>outerZone+0.2 and self.lidar_135deg>outerZone+0.4 and self.lidar_45deg>2.5:
