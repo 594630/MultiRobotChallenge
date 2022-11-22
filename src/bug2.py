@@ -128,7 +128,7 @@ class bug2():
         self.initial_position_ = self.position_
         self.desired_position_ = msg.target_position
         # initialize going to the point
-        self.change_state(0)
+        self.change_state(0)#test
 
         rate = rospy.Rate(20)
 
