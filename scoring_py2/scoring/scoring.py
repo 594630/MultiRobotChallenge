@@ -51,6 +51,7 @@ found_tags = set([])
 
 robot_0_pos = -1
 robot_1_pos = -1
+robot_2_pos = -1
 
 def clbk_odom_0(msg):
     global robot_0_pos
@@ -59,6 +60,10 @@ def clbk_odom_0(msg):
 def clbk_odom_1(msg):
     global robot_1_pos
     robot_1_pos = msg.pose.pose.position
+
+def clbk_odom_2(msg):
+    global robot_2_pos
+    robot_2_pos = msg.pose.pose.position
 
 
 def get_gazebo_models():
@@ -275,6 +280,7 @@ if __name__ == "__main__":
 
     rospy.Subscriber("/tb3_0/odom", Odometry, clbk_odom_0)
     rospy.Subscriber("/tb3_1/odom", Odometry, clbk_odom_1)
+    rospy.Subscriber("/tb3_2/odom", Odometry, clbk_odom_2)
 
     get_gazebo_models()
     start_flag = False
