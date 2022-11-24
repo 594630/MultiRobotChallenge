@@ -26,10 +26,13 @@ class ARTagClass:
         self.marker_list = [False, False, False, False, False]
 
         # Setting a default value for self.marker_id and waiting until it's updated by the ar_pose_marker Subscriber
+        rospy.set_param('/start_flag', True)
         self.marker_id = 100
         while self.marker_id == 100:
             rospy.loginfo("Waitiing for the first marker ID...")
             rospy.sleep(1)
+        # Setting a default value for self.marker_id and waiting until it's updated by the ar_pose_marker Subscriber
+
 
     # Callback function for the Subscriber of the 'ar_pose_marker' topic
     def clbk_ar_marker(self, msg):
