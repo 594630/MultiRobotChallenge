@@ -9,9 +9,9 @@
 
   <group ns="tb3_1">
     <node pkg="multi_robot_challenge_22" name="RobotClass" type="robot.py" output="screen" />
-    <node pkg="multi_robot_challenge_22" name="wall_follower" type="wall_follower.py" output="screen" />
+    <node pkg="multi_robot_challenge_22" name="wall_follower" type="wall_follower_right.py" output="screen" />
     <node pkg="multi_robot_challenge_22" type="go_to_point.py"  name="go_to_point" output="screen"/>
-     <node pkg="multi_robot_challenge_22" type="bug2.py" name="bug2" output="screen" />
+    <node pkg="multi_robot_challenge_22" type="bug2.py" name="bug2" output="screen" />
     <node pkg="multi_robot_challenge_22" name="ar_tag_reciever" type="ar_tag_reciever.py" output="screen" />
   </group>
 

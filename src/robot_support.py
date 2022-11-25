@@ -59,8 +59,7 @@ class RobotClass:
 
         # TODO: wait for the action server to finish
         #     self.action_client.wait_for_result()
-
-    #   pass
+        #pass
 
 
 if __name__ == "__main__":

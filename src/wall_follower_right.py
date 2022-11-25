@@ -77,10 +77,10 @@ class WallFollowerClass:
             self.change_state(1)
         elif regions['front'] > d and regions['fleft'] > d and regions['fright'] < d:
             state_description = 'case 3 - fright'
-            self.change_state(2)
+            self.change_state(0)
         elif regions['front'] > d and regions['fleft'] < d and regions['fright'] > d:
             state_description = 'case 4 - fleft'
-            self.change_state(0)
+            self.change_state(2)
         elif regions['front'] < d and regions['fleft'] > d and regions['fright'] < d:
             state_description = 'case 5 - front and fright'
             self.change_state(1)
@@ -100,12 +100,12 @@ class WallFollowerClass:
     def find_wall(self):
         msg = Twist()
         msg.linear.x = 0.2
-        msg.angular.z = -0.3
+        msg.angular.z = 0.3
         return msg
 
-    def turn_left(self):
+    def turn_right(self):
         msg = Twist()
-        msg.angular.z = 0.3
+        msg.angular.z = -0.3
 
         return msg
 
@@ -126,7 +126,7 @@ class WallFollowerClass:
             if self.state == 0:
                 msg = self.find_wall()
             elif self.state == 1:
-                msg = self.turn_left()
+                msg = self.turn_right()
             elif self.state == 2:
                 msg = self.follow_the_wall()
                 pass

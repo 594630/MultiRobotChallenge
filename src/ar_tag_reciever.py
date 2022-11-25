@@ -73,6 +73,7 @@ class ARTagClass:
                 # Trying to lookup the current transformation from the camera frame to the world frame
                 try:
                     self.trans_camera_odom = self.tfBuffer.lookup_transform("map", "tb3_0/camera_rgb_optical_frame", rospy.Time())
+                    #self.trans_camera_odom = self.tfBuffer.lookup_transform("map", "camera_rgb_optical_frame", rospy.Time())
                     # break
                 except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
                     r.sleep()
