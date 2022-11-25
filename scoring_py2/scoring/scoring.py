@@ -38,6 +38,8 @@ n_of_ar_fire_pos = 0 # correct fire AR tag positions
 n_of_ar_big_fire_pos = 0
 robots_meet = False # Flag to check if the robots meet at the big fire
 
+support_sent = False #Flag to check if support has been sent
+
 # small_fire_id = [0, 1]
 # big_fire_id = [0, 1, 3, 4]
 # human_id = [2]
@@ -118,16 +120,28 @@ def check_pos(model_name, pos):
     return pass_flag, d
 
 def check_robot_pos():
-    global models_pos_dict, robot_0_pos, robot_1_pos
+    global models_pos_dict, robot_0_pos, robot_1_pos, robot_2_pos
+    global support_sent
     pass_flag = False
     # print robot_0_pos
     pass_flag_0, d_0 = distance_error_robot(robot_0_pos, models_pos_dict['Marker4'], 3)
     pass_flag_1, d_1 = distance_error_robot(robot_1_pos, models_pos_dict['Marker4'], 3)
+    pass_flag_2, d_2 = distance_error_robot(robot_2_pos, models_pos_dict['Marker4'], 3)
+
+    if not support_sent:
+        if pass_flag_0:
+            rospy.set_param(robot_0_pos)
+            support_sent = True
+        elif pass_flag_1:
+            rospy.set_param(robot_1_pos)
+            support_sent = True
+
 
     print "Check Robot Pos"
     print d_0
     print d_1
-    if pass_flag_0 and pass_flag_1:
+    print d_2
+    if pass_flag_0 and pass_flag_1 or pass_flag_2 and pass_flag_1 or pass_flag_2 and pass_flag_0:
         pass_flag = True
 
     return pass_flag
@@ -152,6 +166,8 @@ def competition(group_nr):
     rate = rospy.Rate(10)
     while not rospy.is_shutdown():
         if check_big_fire_robots and first_meet:
+
+
             robot_pass_flag = check_robot_pos()
             robots_meet = robot_pass_flag
 
@@ -281,6 +297,9 @@ if __name__ == "__main__":
     rospy.Subscriber("/tb3_0/odom", Odometry, clbk_odom_0)
     rospy.Subscriber("/tb3_1/odom", Odometry, clbk_odom_1)
     rospy.Subscriber("/tb3_2/odom", Odometry, clbk_odom_2)
+
+
+
 
     get_gazebo_models()
     start_flag = False

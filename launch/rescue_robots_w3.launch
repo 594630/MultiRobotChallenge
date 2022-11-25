@@ -63,7 +63,7 @@
     <node pkg="tf" type="static_transform_publisher" name="map_$(arg second_tb3)_broadcaster" args="0 0 0 0 0 0 1 map $(arg second_tb3)/odom 100" />
   </group>
 
-    <!--Spawn Second Robot in Environment-->
+    <!--Spawn Third Robot in Environment-->
   <group ns = "$(arg third_tb3)">
     <param name="robot_description" command="$(find xacro)/xacro $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
 

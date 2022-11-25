@@ -27,6 +27,7 @@ class ARTagClass:
 
         # Setting a default value for self.marker_id and waiting until it's updated by the ar_pose_marker Subscriber
         rospy.set_param('/start_flag', True)
+        rospy.loginfo("start flag set")
         self.marker_id = 100
         while self.marker_id == 100:
             rospy.loginfo("Waitiing for the first marker ID...")
