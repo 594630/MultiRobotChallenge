@@ -34,10 +34,10 @@ class LeaderClass:
     def run(self):
         r = rospy.Rate(1)
         while not rospy.is_shutdown():
-            rospy.loginfo("TB3_0 Lidar Value: %s", self.tb3_0_lidar_value)
-            rospy.loginfo("TB3_1 Lidar Value: %s", self.tb3_1_lidar_value)
-            rospy.loginfo("TB3_0 Marker ID: %s", self.tb3_0_marker_id)
-            rospy.loginfo("TB3_1 Marker ID: %s", self.tb3_1_marker_id)
+            #     rospy.loginfo("TB3_0 Lidar Value: %s", self.tb3_0_lidar_value)
+            #    rospy.loginfo("TB3_1 Lidar Value: %s", self.tb3_1_lidar_value)
+            #   rospy.loginfo("TB3_0 Marker ID: %s", self.tb3_0_marker_id)
+            #  rospy.loginfo("TB3_1 Marker ID: %s", self.tb3_1_marker_id)
 
             r.sleep()
 

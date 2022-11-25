@@ -14,13 +14,21 @@ class RobotClass:
         self.desired_position = Point()
         rospy.init_node('robot', anonymous=False)
 
+        rospy.loginfo("starting support action server")
+
         # TODO: Create an action client connected to the "bug2_nav_action" action server.
         self.action_client = actionlib.SimpleActionClient("bug2_action_server", bug2_navAction)
+
+        rospy.loginfo("finished starting support action server")
 
         # TODO: Wait for the action server to be active
         self.action_client.wait_for_server()
 
-        self.service_server = rospy.Service('send_support', GoToPoint, self.send_support)
+        rospy.loginfo("finished wating for support action server")
+
+        self.service_server = rospy.Service('/send_support', GoToPoint, self.send_support)
+
+        rospy.loginfo("support action server: Online")
 
         self.active = False
 
@@ -31,27 +39,28 @@ class RobotClass:
         rospy.loginfo("Bug2 Navigation has started")
 
     def feedback_cb(self, feedback):
-        rospy.loginfo("Current position of the robot: " + str(feedback.current_position))
+        #    rospy.loginfo("Current position of the robot: " + str(feedback.current_position))
+        pass
 
     def send_support(self, gtp):
-        self.active = gtp.move_switch
         self.desired_position = gtp.target_position
         res = GoToPointResponse()
 
-        return res
-
-    def run(self):
-        # TODO: create an action goal with target_position being a Point with x=0 and y=8
         goal = bug2_navGoal()
-        goal.target_position = Point(0, 8, 0)
+        goal.target_position = self.desired_position
 
         # TODO: send the goal to the action server using the existing self.done_cb, self.active_cb and self.feedback_cb functions
         self.action_client.send_goal(goal, done_cb=self.done_cb, active_cb=self.active_cb, feedback_cb=self.feedback_cb)
 
-        # TODO: wait for the action server to finish
-        self.action_client.wait_for_result()
+        return res
 
-        pass
+    def run(self):
+        rospy.spin()
+
+        # TODO: wait for the action server to finish
+        #     self.action_client.wait_for_result()
+
+    #   pass
 
 
 if __name__ == "__main__":

@@ -1,0 +1,8 @@
+Fri, 25 Nov 2022 18:29:04
+['Found fire AR id: ', 3, 'n_of_ar_fire: ', 1]
+Fri, 25 Nov 2022 18:29:05
+['Found fire AR id: ', 0, 'n_of_ar_fire: ', 2]
+Fri, 25 Nov 2022 18:30:02
+['Found fire AR id: ', 4, 'n_of_ar_fire: ', 2]
+Fri, 25 Nov 2022 18:30:40
+The robots met at the big fire

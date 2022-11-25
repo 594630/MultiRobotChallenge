@@ -97,21 +97,18 @@ class WallFollowerClass:
 
     def find_wall(self):
         msg = Twist()
-        if not rospy.get_param('robot_wait_bigfire'):
-            msg.linear.x = 0.2
-            msg.angular.z = -0.3
+        msg.linear.x = 0.2
+        msg.angular.z = -0.3
         return msg
 
     def turn_left(self):
         msg = Twist()
-        if not rospy.get_param('robot_wait_bigfire'):
-            msg.angular.z = 0.3
+        msg.angular.z = 0.3
         return msg
 
     def follow_the_wall(self):
         msg = Twist()
-        if not rospy.get_param('robot_wait_bigfire'):
-            msg.linear.x = 0.5
+        msg.linear.x = 0.5
         return msg
 
     def main(self):

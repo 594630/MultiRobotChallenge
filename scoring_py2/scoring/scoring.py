@@ -14,6 +14,7 @@ from rospy.core import rospywarn
 from gazebo_msgs.msg import ModelStates
 from geometry_msgs.msg import Point
 from nav_msgs.msg import Odometry
+from bug_2_exercise.srv import GoToPoint, GoToPointResponse
 
 from math import log, sqrt
 
@@ -54,6 +55,8 @@ found_tags = set([])
 robot_0_pos = -1
 robot_1_pos = -1
 robot_2_pos = -1
+
+#srv_send_support = 0
 
 def clbk_odom_0(msg):
     global robot_0_pos
@@ -130,10 +133,12 @@ def check_robot_pos():
 
     if not support_sent:
         if pass_flag_0:
-            rospy.set_param(robot_0_pos)
+            rospy.set_param('robot_wait_bigfire', True)
+            send_support_target(robot_0_pos)
             support_sent = True
         elif pass_flag_1:
-            rospy.set_param(robot_1_pos)
+            rospy.set_param('robot_wait_bigfire', True)
+            send_support_target(robot_1_pos)
             support_sent = True
 
 
@@ -284,6 +289,16 @@ def total_score_calc():
         score += robots_meet_score
     return elapsed_time, score
 
+def send_support_target(pos):
+    rospy.loginfo("sending...")
+    # TODO: wait for the service servers 'go_to_point_switch' and 'wall_follower_switch' to go active
+    rospy.wait_for_service('/send_support')
+    rospy.loginfo("sending...to server")
+    # TODO: create a service client connected to the 'go_to_point_switch' server
+    #global srv_send_support
+    srv_send_support = rospy.ServiceProxy('/send_support', GoToPoint)
+    rospy.loginfo("serviced")
+    srv_send_support(True, pos)
 
 
 if __name__ == "__main__":
@@ -297,7 +312,6 @@ if __name__ == "__main__":
     rospy.Subscriber("/tb3_0/odom", Odometry, clbk_odom_0)
     rospy.Subscriber("/tb3_1/odom", Odometry, clbk_odom_1)
     rospy.Subscriber("/tb3_2/odom", Odometry, clbk_odom_2)
-
 
 
 

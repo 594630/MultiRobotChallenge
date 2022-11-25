@@ -85,7 +85,7 @@ class bug2():
     def change_state(self, state):
         self.state_ = state
         log = "state changed: %s" % self.state_desc_[state]
-        rospy.loginfo(log)
+    #    rospy.loginfo(log)
         if self.found_wall == False:
             if self.state_ == 0:
                 resp = self.srv_client_go_to_point_(True, self.desired_position_)
@@ -123,7 +123,7 @@ class bug2():
         return angle
 
     def bug2_execute_cb(self, msg):
-        rospy.loginfo("starting bug2 algorythm")
+        rospy.loginfo("starting bug2 algorithm")
         # rospy.sleep(3)
         self.initial_position_ = self.position_
         self.desired_position_ = msg.target_position

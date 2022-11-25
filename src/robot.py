@@ -26,7 +26,8 @@ class RobotClass:
         rospy.loginfo("Bug2 Navigation has started")
 
     def feedback_cb(self, feedback):
-        rospy.loginfo("Current position of the robot: " + str(feedback.current_position))
+        #    rospy.loginfo("Current position of the robot: " + str(feedback.current_position))
+        pass
 
     def run(self):
         # TODO: create an action goal with target_position being a Point with x=0 and y=8
