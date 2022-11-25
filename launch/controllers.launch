@@ -20,7 +20,7 @@
  <group ns="tb3_2">
   <node pkg="multi_robot_challenge_22" type="wall_follower.py" name="follow_wall" output="screen" />
   <node pkg="multi_robot_challenge_22" type="go_to_point.py"  name="go_to_point" output="screen"/>
-  <node pkg="multi_robot_challenge_22" type="bug2.py" name="bug2" output="screen" />
+  <node pkg="multi_robot_challenge_22" type="bug2_support.py" name="bug2" output="screen" />
   <node pkg="multi_robot_challenge_22" type="robot_support.py" name="robot_class" output="screen" />
   <node pkg="multi_robot_challenge_22" name="ar_tag_reciever" type="ar_tag_reciever.py" output="screen" />
 </group>

@@ -141,13 +141,13 @@ def check_robot_pos():
             send_support_target(robot_1_pos)
             support_sent = True
 
-
-    print "Check Robot Pos"
-    print d_0
-    print d_1
-    print d_2
+    print("Check Robot Pos")
+    #    print d_0
+#    print d_1
+#    print d_2
     if pass_flag_0 and pass_flag_1 or pass_flag_2 and pass_flag_1 or pass_flag_2 and pass_flag_0:
         pass_flag = True
+        rospy.set_param('robot_wait_bigfire', False)
 
     return pass_flag
 

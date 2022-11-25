@@ -17,6 +17,8 @@ from multi_robot_challenge_22.msg import bug2_navAction, bug2_navGoal, bug2_navR
 class bug2():
     def __init__(self):
 
+        rospy.set_param('robot_wait_bigfire', False)
+
         self.found_wall = False
         # TODO: Initialze a ros node
         rospy.init_node('bug2', anonymous=False)
