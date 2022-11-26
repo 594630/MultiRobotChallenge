@@ -56,8 +56,6 @@ robot_0_pos = -1
 robot_1_pos = -1
 robot_2_pos = -1
 
-#srv_send_support = 0
-
 def clbk_odom_0(msg):
     global robot_0_pos
     robot_0_pos = msg.pose.pose.position
