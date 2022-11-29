@@ -10,14 +10,19 @@ class LeaderClass:
 
         self.tb3_0_comm_sub = rospy.Subscriber("/tb3_0/namespace_com", Float64, self.clbk_tb3_0_comm)
         self.tb3_1_comm_sub = rospy.Subscriber("/tb3_1/namespace_com", Float64, self.clbk_tb3_1_comm)
+        self.tb3_1_comm_sub = rospy.Subscriber("/tb3_2/namespace_com", Float64, self.clbk_tb3_2_comm)
 
         self.tb3_0_comm_sub = rospy.Subscriber("/tb3_0/marker_id", UInt32, self.clbk_tb3_0_marker_id)
         self.tb3_1_comm_sub = rospy.Subscriber("/tb3_1/marker_id", UInt32, self.clbk_tb3_1_marker_id)
+        self.tb3_1_comm_sub = rospy.Subscriber("/tb3_2/marker_id", UInt32, self.clbk_tb3_2_marker_id)
 
         self.tb3_0_lidar_value = 1000
         self.tb3_1_lidar_value = 1000
+        self.tb3_2_lidar_value = 1000
+
         self.tb3_0_marker_id = 100
         self.tb3_1_marker_id = 100
+        self.tb3_2_marker_id = 100
 
     def clbk_tb3_0_comm(self, msg):
         self.tb3_0_lidar_value = msg.data
@@ -25,11 +30,17 @@ class LeaderClass:
     def clbk_tb3_1_comm(self, msg):
         self.tb3_1_lidar_value = msg.data
 
+    def clbk_tb3_2_comm(self, msg):
+        self.tb3_2_lidar_value = msg.data
+
     def clbk_tb3_0_marker_id(self, msg):
         self.tb3_0_marker_id = msg.data
 
     def clbk_tb3_1_marker_id(self, msg):
         self.tb3_1_marker_id = msg.data
+
+    def clbk_tb3_2_marker_id(self, msg):
+        self.tb3_2_marker_id = msg.data
 
     def run(self):
         r = rospy.Rate(1)
