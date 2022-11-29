@@ -4,6 +4,7 @@
   <arg name="open_rviz" default="true"/>
   <arg name="first_tb3"  default="tb3_0"/>
   <arg name="second_tb3" default="tb3_1"/>
+  <arg name="third_tb3" default="tb3_2"/>
 
   <arg name="first_tb3_x_pos" default="-1.0"/>
   <arg name="first_tb3_y_pos" default="1.0"/>
@@ -14,6 +15,11 @@
   <arg name="second_tb3_y_pos" default="-1.0"/>
   <arg name="second_tb3_z_pos" default="0.0"/>
   <arg name="second_tb3_yaw"   default="0.0"/>
+
+  <arg name="third_tb3_x_pos" default="-1.0"/>
+  <arg name="third_tb3_y_pos" default="-1.5"/>
+  <arg name="third_tb3_z_pos" default="0.0"/>
+  <arg name="third_tb3_yaw"   default="0.0"/>
 
   <arg name="world_name" default="dat160_w2" />
   <arg name="map_file" default="$(find multi_robot_challenge_22)/maps/map_$(arg world_name).yaml"/>
@@ -57,6 +63,19 @@
     <node pkg="tf" type="static_transform_publisher" name="map_$(arg second_tb3)_broadcaster" args="0 0 0 0 0 0 1 map $(arg second_tb3)/odom 100" />
   </group>
 
+      <!--Spawn Third Robot in Environment-->
+  <group ns = "$(arg third_tb3)">
+    <param name="robot_description" command="$(find xacro)/xacro $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+    <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher" output="screen">
+      <param name="publish_frequency" type="double" value="50.0" />
+      <param name="tf_prefix" value="$(arg third_tb3)" />
+    </node>
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model $(arg third_tb3) -x $(arg third_tb3_x_pos) -y $(arg third_tb3_y_pos) -z $(arg third_tb3_z_pos) -Y $(arg third_tb3_yaw) -param robot_description" />
+    <node pkg="tf" type="static_transform_publisher" name="map_$(arg third_tb3)_broadcaster" args="0 0 0 0 0 0 1 map $(arg third_tb3)/odom 100" />
+  </group>
+
   <!--AR Track-->
   <include file="$(find multi_robot_challenge_22)/launch/ar_track.launch">
     <arg name="robot_namespace" value="$(arg first_tb3)" />
@@ -64,7 +83,9 @@
   <include file="$(find multi_robot_challenge_22)/launch/ar_track.launch">
     <arg name="robot_namespace" value="$(arg second_tb3)" />
   </include>
-
+  <include file="$(find multi_robot_challenge_22)/launch/ar_track.launch">
+    <arg name="robot_namespace" value="$(arg third_tb3)" />
+  </include>
 
   <!--Rviz-->
   <group if="$(arg open_rviz)">

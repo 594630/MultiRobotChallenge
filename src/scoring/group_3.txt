@@ -1,0 +1,20 @@
+Mon, 28 Nov 2022 23:34:32
+['Found fire AR id: ', 3, 'n_of_ar_fire: ', 1]
+Mon, 28 Nov 2022 23:34:41
+['Found fire AR id: ', 0, 'n_of_ar_fire: ', 2]
+Mon, 28 Nov 2022 23:39:21
+['Found fire AR id: ', 4, 'n_of_ar_fire: ', 2]
+Mon, 28 Nov 2022 23:40:56
+The robots met at the big fire
+Mon, 28 Nov 2022 23:41:02
+The robots met at the big fire
+Mon, 28 Nov 2022 23:47:06
+['Found human AR id: ', 2, 'n_of_ar_human: ', 1]
+Mon, 28 Nov 2022 23:48:26
+['Found fire AR id: ', 1, 'n_of_ar_fire: ', 3]
+Mon, 28 Nov 2022 23:48:26
+['Final score: ', 29, ' in: ', 971, ' seconds']
+Mon, 28 Nov 2022 23:48:26
+['Total human tags: ', 1, ' Total fire tags: ', 3]
+Mon, 28 Nov 2022 23:48:26
+['Total human pos: ', 0, ' Total fire pos: ', 0]
